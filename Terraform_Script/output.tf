@@ -1,8 +1,8 @@
-output "public_deployment_machine" {
-  value = module.module.deployment-machine-output
+output "public_IP_Machine-3" {
+  value = module.module.Machine-3-output
 }
 
 
-output "public_sonar-nexux" {
-  value = module.module.sonar-nexux-output
+output "public_IP_Machine-2" {
+  value = module.module.Machine-2-output
 }
