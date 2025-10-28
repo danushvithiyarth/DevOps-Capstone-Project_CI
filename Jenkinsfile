@@ -21,16 +21,14 @@ pipeline {
 
         stage('Checkout') {
             steps {
-                dir('terraform') {
-                    sh 'rm -rf DevOps-Capstone-Project_CI'
-                    git "https://github.com/danushvithiyarth/DevOps-Capstone-Project_CI.git"
-                }
+                sh 'rm -rf DevOps-Capstone-Project_CI'
+                git "https://github.com/danushvithiyarth/DevOps-Capstone-Project_CI.git"
             }
         }
 
         stage('Terraform Init & Plan') {
             steps {
-                dir('terraform') {
+                dir('DevOps-Capstone-Project_CI/Terraform_Script') {
                     sh 'terraform init -input=false'
                     sh 'terraform fmt -check'
                     sh 'terraform plan -input=false -out=tfplan'
@@ -38,6 +36,7 @@ pipeline {
                 }
             }
         }
+
 
         stage('Approval') {
             when {
@@ -56,7 +55,7 @@ pipeline {
 
         stage('Apply') {
             steps {
-                dir('terraform') {
+                dir('DevOps-Capstone-Project_CI/Terraform_Script') {
                     sh 'terraform apply -input=false tfplan'
                 }
             }
