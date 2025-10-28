@@ -11,12 +11,6 @@ pipeline {
     }
 
     stages {
-        stage('Clean Workspace') {
-            steps {
-                cleanWs()
-            }
-        }
-
         stage('Print Parameter') {
             steps {
                 script {
@@ -27,13 +21,14 @@ pipeline {
 
         stage('Checkout') {
             steps {
+                deleteDir()
                 git branch: 'main', url: 'https://github.com/danushvithiyarth/DevOps-Capstone-Project_CI.git'
             }
         }
 
         stage('Terraform Init & Plan') {
             steps {
-                dir('DevOps-Capstone-Project_CI/Terraform_Script') {
+                dir('Terraform_Script') {
                     sh '''
                         terraform init -input=false
                         terraform fmt -check
@@ -63,7 +58,7 @@ pipeline {
 
         stage('Apply') {
             steps {
-                dir('DevOps-Capstone-Project_CI/Terraform_Script') {
+                dir('Terraform_Script') {
                     sh 'terraform apply -input=false tfplan'
                 }
             }
