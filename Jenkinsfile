@@ -11,6 +11,12 @@ pipeline {
     }
 
     stages {
+        stage('Clean Workspace') {
+            steps {
+                cleanWs()
+            }
+        }
+
         stage('Print Parameter') {
             steps {
                 script {
@@ -21,22 +27,24 @@ pipeline {
 
         stage('Checkout') {
             steps {
-                sh 'rm -rf DevOps-Capstone-Project_CI'
-                git "https://github.com/danushvithiyarth/DevOps-Capstone-Project_CI.git"
+                git branch: 'main', url: 'https://github.com/danushvithiyarth/DevOps-Capstone-Project_CI.git'
             }
         }
 
         stage('Terraform Init & Plan') {
             steps {
                 dir('DevOps-Capstone-Project_CI/Terraform_Script') {
-                    sh 'terraform init -input=false'
-                    sh 'terraform fmt -check'
-                    sh 'terraform plan -input=false -out=tfplan'
-                    sh 'terraform show -no-color tfplan > tfplan.txt'
+                    sh '''
+                        terraform init -input=false
+                        terraform fmt -check
+                        terraform plan -input=false -out=tfplan
+                        terraform show -no-color tfplan > tfplan.txt
+                        echo "Preview of Terraform plan:"
+                        head -n 30 tfplan.txt
+                    '''
                 }
             }
         }
-
 
         stage('Approval') {
             when {
@@ -46,9 +54,9 @@ pipeline {
             }
             steps {
                 script {
-                    echo "Terraform plan preview (first 50 lines):"
-                    sh 'head -n 50 terraform/tfplan.txt'
-                    input message: "Do you want to apply the plan?"
+                    echo "Showing Terraform plan summary before approval..."
+                    sh 'head -n 50 DevOps-Capstone-Project_CI/Terraform_Script/tfplan.txt'
+                    input message: "Do you want to apply the Terraform plan?"
                 }
             }
         }
