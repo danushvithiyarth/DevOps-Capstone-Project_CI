@@ -4,5 +4,5 @@ provider "aws" {
 
 
 module "module" {
-  source = "./Module"
+  source = "./Modules"
 }
