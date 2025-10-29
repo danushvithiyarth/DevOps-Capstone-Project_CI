@@ -19,23 +19,24 @@ pipeline {
                 dir('Terraform_Script') {
                     sh '''
                         terraform init -input=false
-                      }
-                  }
-              }
+                    '''
+                }
+            }
+        }
 
         stage('Approval') {
             steps {
                 script {
                     dir('Terraform_Script') {
-                      echo "Showing Terraform state summary before destroy..."
-                      sh 'terraform state list'
-                      input message: "Do you want to destroy the Terraform Infrastructure?"
+                        echo "Showing Terraform state summary before destroy..."
+                        sh 'terraform state list || echo "No resources found in state."'
+                        input message: "Do you want to destroy the Terraform Infrastructure?"
                     }
                 }
             }
         }
 
-        stage('Apply') {
+        stage('Destroy') {
             steps {
                 dir('Terraform_Script') {
                     sh 'terraform destroy -auto-approve'
