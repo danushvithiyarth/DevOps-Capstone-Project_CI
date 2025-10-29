@@ -1,6 +1,6 @@
 resource "aws_instance" "Machine-2" {
   ami           = "ami-0a716d3f3b16d290c"
-  instance_type = "t3.medium"
+  instance_type = "t3.large"
   key_name      = "keyInTerminal"
   subnet_id     = module.vpc.public_subnets[0]
   vpc_security_group_ids      = [aws_security_group.Machine-2-securitygroup.id]
