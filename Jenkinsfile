@@ -25,6 +25,14 @@ pipeline {
                 sh 'mvn clean install -DskipTests'
             }
         }
+
+      stage('Nexus') {
+            steps {
+                withMaven(globalMavenSettingsConfig: 'd7e19832-2bd9-4d28-a28f-59d83db3f75e', maven: 'maven-3.11', traceability: true) {
+                sh 'mvn deploy -DskipTests'
+                }
+            }
+        }
       
       stage('SonarQube-analysis') { 
             steps {
