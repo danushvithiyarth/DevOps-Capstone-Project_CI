@@ -13,6 +13,14 @@ pipeline {
     }
 
     stages {
+      stage('Check Java') {
+        steps {
+            sh 'java -version'
+            sh 'javac -version'
+            sh 'mvn -version'
+            }
+        }
+
       stage('Checkout') {
             steps {
                 deleteDir()
