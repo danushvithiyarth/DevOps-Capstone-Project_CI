@@ -50,7 +50,7 @@ pipeline {
             steps {
                 script {
                     echo "Showing Terraform plan summary before approval..."
-                    sh 'head -n 50 DevOps-Capstone-Project_CI/Terraform_Script/tfplan.txt'
+                    sh 'head -n 50 Terraform_Script/tfplan.txt'
                     input message: "Do you want to apply the Terraform plan?"
                 }
             }
