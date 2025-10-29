@@ -1,0 +1,46 @@
+pipeline {
+    agent any
+
+    environment {
+        AWS_ACCESS_KEY_ID     = credentials('Access_Key')   
+        AWS_SECRET_ACCESS_KEY = credentials('Secret_ID')   
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                deleteDir()
+                git branch: 'main', url: 'https://github.com/danushvithiyarth/DevOps-Capstone-Project_CI.git'
+            }
+        }
+
+        stage('Terraform Init') {
+            steps {
+                dir('Terraform_Script') {
+                    sh '''
+                        terraform init -input=false
+                      }
+                  }
+              }
+
+        stage('Approval') {
+            steps {
+                script {
+                    dir('Terraform_Script') {
+                      echo "Showing Terraform state summary before destroy..."
+                      sh 'terraform state list'
+                      input message: "Do you want to destroy the Terraform Infrastructure?"
+                    }
+                }
+            }
+        }
+
+        stage('Apply') {
+            steps {
+                dir('Terraform_Script') {
+                    sh 'terraform destroy -auto-approve'
+                }
+            }
+        }
+    }
+}
