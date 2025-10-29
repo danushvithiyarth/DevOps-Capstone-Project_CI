@@ -28,8 +28,8 @@ pipeline {
 
       stage('Nexus') {
             steps {
-                configFileProvider([configFile(fileId: 'Nexus-config', variable: 'maven-deploy')]) {
-                   sh 'mvn -s $maven-deploy clean deploy -DskipTests'
+                configFileProvider([configFile(fileId: 'Nexus-config', variable: 'mavendeploy')]) {
+                   sh 'mvn -s $mavendeploy clean deploy -DskipTests'
                 }
             }
         }
