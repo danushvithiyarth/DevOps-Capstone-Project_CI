@@ -1,22 +1,22 @@
-resource "aws_instance" "Machine-2" {
+resource "aws_instance" "Machine-1" {
   ami           = "ami-0a716d3f3b16d290c"
-  instance_type = "t3.medium"
+  instance_type = "t3.large"
   key_name      = "keyInTerminal"
   subnet_id     = module.vpc.public_subnets[0]
-  vpc_security_group_ids      = [aws_security_group.Machine-2-securitygroup.id]
+  vpc_security_group_ids      = [aws_security_group.Machine-1-securitygroup.id]
   associate_public_ip_address = true
   root_block_device {
-    volume_size = 35
+    volume_size = 30
     volume_type = "gp3"
   }
   tags = {
-    Name = "SonreQube and Nexux Machine-2"
+    Name = "CI/CD Machine-1"
   }
 }
 
-resource "aws_security_group" "Machine-2-securitygroup" {
-  name        = "Machine-2-securitygroup"
-  description = "SG for Machine-2"
+resource "aws_security_group" "Machine-1-securitygroup" {
+  name        = "Machine-1-securitygroup"
+  description = "SG for Machine-1"
   vpc_id      = aws_vpc.vpc.id
 
   ingress {
