@@ -18,6 +18,12 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/danushvithiyarth/DevOps-Capstone-Project_CI.git'
             }
         }
+
+      stage('Install Dependencies') {
+            steps {
+                sh 'mvn clean install'
+            }
+        }
       
       stage('SonarQube-analysis') { 
             steps {
@@ -29,12 +35,6 @@ pipeline {
                         -Dsonar.java.binaries=target/classes
                     '''     
                 }
-            }
-        }
-      
-      stage('Install Dependencies') {
-            steps {
-                sh 'mvn clean install'
             }
         }
 
