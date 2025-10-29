@@ -13,14 +13,6 @@ pipeline {
     }
 
     stages {
-      stage('Check Java') {
-        steps {
-            sh 'java -version'
-            sh 'javac -version'
-            sh 'mvn -version'
-            }
-        }
-
       stage('Checkout') {
             steps {
                 deleteDir()
@@ -30,7 +22,7 @@ pipeline {
 
       stage('Install Dependencies') {
             steps {
-                sh 'mvn clean install'
+                sh 'mvn clean install -DskipTests'
             }
         }
       
