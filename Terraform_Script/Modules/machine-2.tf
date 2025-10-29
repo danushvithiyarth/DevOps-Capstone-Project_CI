@@ -6,7 +6,7 @@ resource "aws_instance" "Machine-2" {
   vpc_security_group_ids      = [aws_security_group.Machine-2-securitygroup.id]
   associate_public_ip_address = true
   root_block_device {
-    volume_size = 35
+    volume_size = 30
     volume_type = "gp3"
   }
   tags = {
