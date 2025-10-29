@@ -17,7 +17,7 @@ resource "aws_instance" "Machine-3" {
 resource "aws_security_group" "Machine-3-securitygroup" {
   name        = "Machine-3-securitygroup"
   description = "SG for Machine-3"
-  vpc_id      = aws_vpc.vpc.id
+  vpc_id      = module.vpc.vpc_id
 
   ingress {
     from_port   = "22"
