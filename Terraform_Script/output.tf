@@ -9,3 +9,11 @@ output "public_IP_Machine-2" {
 output "public_IP_Machine-3" {
   value = module.module.Machine-3-output
 }
+
+output "cluster_endpoint" {
+  value = module.module.cluster_endpoint
+}
+
+output "cluster_certificate_authority_data" {
+  value = module.module.cluster_certificate_authority_data
+}
