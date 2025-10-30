@@ -28,7 +28,7 @@ pipeline {
 
       stage('Nexus') {
             steps {
-                configFileProvider([configFile(fileId: 'Nexus-config', variable: 'mavendeploy')]) {
+                configFileProvider([configFile(fileId: '4091111d-75d0-4909-adfc-d7565ee38844', variable: 'mavendeploy')]) {
                    sh 'mvn -s $mavendeploy clean deploy -DskipTests'
                 }
             }
