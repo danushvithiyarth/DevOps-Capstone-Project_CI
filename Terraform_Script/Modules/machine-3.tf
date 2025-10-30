@@ -27,6 +27,13 @@ resource "aws_security_group" "Machine-3-securitygroup" {
   }
 
   ingress {
+    from_port   = "433"
+    to_port     = "433"
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
     from_port   = "80"
     to_port     = "80"
     protocol    = "tcp"
