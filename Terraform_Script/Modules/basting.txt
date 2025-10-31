@@ -1,3 +1,4 @@
+
 resource "aws_security_group_rule" "allow_ec2_to_eks_api" {
   description              = "Allow EC2 bastion to access private EKS API"
   type                     = "ingress"
@@ -26,4 +27,3 @@ resource "aws_security_group_rule" "allow_worker_nodes_egress_self" {
   security_group_id = "sg-08fa8e70deafa4e04"
   self              = true
 }
-
