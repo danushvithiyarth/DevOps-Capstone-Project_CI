@@ -8,12 +8,3 @@ resource "aws_security_group_rule" "allow_control_plane_to_nodes" {
   source_security_group_id = "sg-0bd62af49002eacbe"   # Control plane SG
 }
 
-resource "aws_security_group_rule" "allow_worker_nodes_to_control_plane" {
-  description              = "Allow worker nodes to access EKS Control Plane"
-  type                     = "egress"
-  from_port                = 443
-  to_port                  = 443
-  protocol                 = "tcp"
-  security_group_id        = "sg-03467cb08ee3df626"   # Worker nodes SG
-  destination_security_group_id = "sg-0bd62af49002eacbe"   # Control plane SG
-}
