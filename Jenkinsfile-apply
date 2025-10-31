@@ -30,13 +30,27 @@ pipeline {
             steps {
                 dir('Terraform_Script') {
                     sh '''
-                        terraform init -input=false
-                        terraform fmt -check
-                        terraform plan -input=false -out=tfplan
-                        terraform show -no-color tfplan > tfplan.txt
-                        echo "Preview of Terraform plan:"
-                        head -n 30 tfplan.txt
-                    '''
+                # Clean any old Terraform state/modules to avoid corrupted providers
+                rm -rf .terraform
+                rm -f .terraform.lock.hcl
+
+                # Make sure /tmp is writable
+                chmod 1777 /tmp
+
+                # Initialize Terraform
+                terraform init -input=false
+
+                # Format check
+                terraform fmt -check
+
+                # Create plan
+                terraform plan -input=false -out=tfplan
+
+                # Show plan summary
+                terraform show -no-color tfplan > tfplan.txt
+                echo "Preview of Terraform plan:"
+                head -n 30 tfplan.txt
+            '''
                 }
             }
         }
