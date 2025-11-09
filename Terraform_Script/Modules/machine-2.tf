@@ -14,6 +14,14 @@ resource "aws_instance" "Machine-2" {
   }
 }
 
+data "http" "my_ip" {
+  url = "https://ifconfig.me"
+}
+
+locals {
+  my_ip_cidr = "${chomp(data.http.my_ip.response_body)}/32"
+}
+
 resource "aws_security_group" "Machine-2-securitygroup" {
   name        = "Machine-2-securitygroup"
   description = "SG for Machine-2"
@@ -65,7 +73,7 @@ resource "aws_security_group" "Machine-2-securitygroup" {
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = [local.my_ip_cidr]
   }
 }
 
