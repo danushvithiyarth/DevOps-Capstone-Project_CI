@@ -14,14 +14,6 @@ resource "aws_instance" "Machine-1" {
   }
 }
 
-data "http" "my_ip" {
-  url = "https://ifconfig.me"
-}
-
-locals {
-  my_ip_cidr = "${chomp(data.http.my_ip.response_body)}/32"
-}
-
 resource "aws_security_group" "Machine-1-securitygroup" {
   name        = "Machine-1-securitygroup"
   description = "SG for Machine-1"
