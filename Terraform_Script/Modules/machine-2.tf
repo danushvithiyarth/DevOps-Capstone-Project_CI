@@ -44,7 +44,7 @@ resource "aws_security_group" "Machine-2-securitygroup" {
     from_port   = "9000"
     to_port     = "9000"
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = ["16.16.185.237/32"]
   }
 
   ingress {

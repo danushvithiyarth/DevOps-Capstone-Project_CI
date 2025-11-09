@@ -65,7 +65,7 @@ resource "aws_security_group" "Machine-3-securitygroup" {
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = ["13.49.224.244/32"]
   }
 }
 
