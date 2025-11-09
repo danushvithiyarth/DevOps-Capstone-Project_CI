@@ -23,7 +23,7 @@ resource "aws_security_group" "Machine-1-securitygroup" {
     from_port   = "22"
     to_port     = "22"
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = ["16.171.114.137/32"]
   }
 
   ingress {
@@ -58,7 +58,7 @@ resource "aws_security_group" "Machine-1-securitygroup" {
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
-    cidr_blocks = ["13.60.226.54/32"]
+    cidr_blocks = ["0.0.0.0/0"]
   }
 }
 
