@@ -80,30 +80,28 @@ pipeline {
                 sh "docker push ${IMAGE_NAME} --all-tags"
             }
         }
-      /*
-        stage('Git Clone&Update&Push manifest repo') {
+        
+        stage('GitOps with ArgoCD') {
             steps {
-                echo 'Cloning repo'
-                sh 'rm -rf ArgoCd-project-CD_Process'
-                sh "git clone https://github.com/danushvithiyarth/ArgoCd-project-CD_Process.git"
+                sh 'rm -rf DevOps-Capstone-Project_CD'
+                sh "git clone https://github.com/danushvithiyarth/DevOps-Capstone-Project_CD.git"
 
                 echo 'Updating repo'
-                dir("ArgoCd-project-CD_Process/manifest"){
-                  sh 'sed -i "s#danushvithiyarth/argocdproject:.*#${IMAGE_NAME}:${IMAGE_VERSION}#g" deployment.yaml'
+                dir("DevOps-Capstone-Project_CD/manifest"){
+                  sh 'sed -i "s#danushvithiyarth/capstoneproject:.*#${IMAGE_NAME}:${IMAGE_VERSION}#g" deployment.yaml'
                   sh 'cat deployment.yaml'
 
-                  echo 'Commiting and Pushing the repo'
                   sh 'git config --global user.name "admin"'
                   sh 'git config --global user.email "abc@gmail.com"'
                   sh 'git add deployment.yaml'
                   sh 'git commit -m "Update image tag to ${IMAGE_NAME}:${IMAGE_VERSION}"'
                   withCredentials([usernamePassword(credentialsId: 'github-cerds', usernameVariable: 'GITHUB_USERNAME', passwordVariable: 'GITHUB_TOKEN')]) {
-                     sh 'git remote set-url origin https://$GITHUB_USERNAME:$GITHUB_TOKEN@github.com/danushvithiyarth/ArgoCd-project-CD_Process.git'
+                     sh 'git remote set-url origin https://$GITHUB_USERNAME:$GITHUB_TOKEN@github.com/danushvithiyarth/DevOps-Capstone-Project_CD.git'
                      sh 'git push origin main'
                   }
                }     
             }
-        }*/
+        }
     }
 
     post {
