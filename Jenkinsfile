@@ -89,11 +89,11 @@ pipeline {
                 echo 'Updating repo'
                 dir("DevOps-Capstone-Project_CD/manifest"){
                   sh 'sed -i "s#danushvithiyarth/capstoneproject:.*#${IMAGE_NAME}:${IMAGE_VERSION}#g" frontendapp.yaml'
-                  sh 'cat deployment.yaml'
+                  sh 'cat frontendapp.yaml'
 
                   sh 'git config --global user.name "admin"'
                   sh 'git config --global user.email "abc@gmail.com"'
-                  sh 'git add deployment.yaml'
+                  sh 'git add frontendapp.yaml'
                   sh 'git commit -m "Update image tag to ${IMAGE_NAME}:${IMAGE_VERSION}"'
                   withCredentials([usernamePassword(credentialsId: 'github-cerds', usernameVariable: 'GITHUB_USERNAME', passwordVariable: 'GITHUB_TOKEN')]) {
                      sh 'git remote set-url origin https://$GITHUB_USERNAME:$GITHUB_TOKEN@github.com/danushvithiyarth/DevOps-Capstone-Project_CD.git'
