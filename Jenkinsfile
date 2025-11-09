@@ -88,7 +88,7 @@ pipeline {
 
                 echo 'Updating repo'
                 dir("DevOps-Capstone-Project_CD/manifest"){
-                  sh 'sed -i "s#danushvithiyarth/capstoneproject:.*#${IMAGE_NAME}:${IMAGE_VERSION}#g" deployment.yaml'
+                  sh 'sed -i "s#danushvithiyarth/capstoneproject:.*#${IMAGE_NAME}:${IMAGE_VERSION}#g" frontendapp.yaml'
                   sh 'cat deployment.yaml'
 
                   sh 'git config --global user.name "admin"'
