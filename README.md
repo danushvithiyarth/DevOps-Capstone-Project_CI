@@ -194,6 +194,15 @@ Authenticates using Jenkins credentials and pushes images to:
 
 ---
 
+## 📝 Activity Log
+
+This repository includes an **Activity Log** folder with screenshots and evidence of the CI pipeline execution, Terraform runs, and other configuration steps:
+
+- `Activity_Logs_CI/` – Contains screenshots of Jenkins pipeline execution, Terraform apply/destroy stages, SonarQube analysis, Nexus deployments, Trivy & OWASP reports, and DockerHub pushes.
+
+
+---
+
 ## 🧾 Author
 
 **👤 Danush Vithiyarth**  
